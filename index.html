@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f45b35">
+<title>Mudhol Eats — Your town, your food</title>
+<style>
+:root{--orange:#f45b35;--ink:#202124;--muted:#73777d;--cream:#fffaf5;--line:#eee8e2;--green:#16834a;--shadow:0 12px 35px rgba(38,28,20,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#fff;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}.wrap{width:min(1160px,92%);margin:auto}
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:21px;letter-spacing:-.7px}.brand-mark{display:grid;place-items:center;width:39px;height:39px;border-radius:13px;background:var(--orange);color:white;font-size:21px}.brand span:last-child{color:var(--orange)}.nav-right{display:flex;align-items:center;gap:12px}.location{font-size:13px;color:var(--muted)}.cart-btn{border:0;background:var(--ink);color:white;padding:11px 16px;border-radius:13px;font-weight:750}.cart-count{display:inline-grid;place-items:center;background:var(--orange);width:21px;height:21px;border-radius:50%;margin-left:6px;font-size:12px}
+.hero{padding:56px 0 36px;background:radial-gradient(circle at 82% 20%,#ffe3d5 0,transparent 28%),linear-gradient(120deg,#fff8f1,#fff 65%)}.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:35px}.eyebrow{color:var(--orange);font-size:12px;font-weight:850;letter-spacing:1.7px;text-transform:uppercase}.hero h1{font-size:clamp(38px,5.5vw,65px);line-height:1.02;letter-spacing:-2.8px;margin:13px 0}.hero h1 em{font-style:normal;color:var(--orange)}.hero p{color:var(--muted);font-size:16px;line-height:1.7;max-width:510px}.hero-art{min-height:260px;border-radius:28px;background:linear-gradient(145deg,#ffb78e,#f45b35);display:grid;place-items:center;overflow:hidden;position:relative;box-shadow:var(--shadow)}.hero-art:before,.hero-art:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.18)}.hero-art:before{width:240px;height:240px;right:-40px;top:-60px}.hero-art:after{width:160px;height:160px;left:-40px;bottom:-60px}.hero-food{font-size:clamp(100px,15vw,175px);filter:drop-shadow(0 18px 14px rgba(90,25,5,.2));z-index:1;transform:rotate(-8deg)}.hero-tag{position:absolute;z-index:2;bottom:20px;right:20px;background:#fff;color:var(--ink);padding:10px 14px;border-radius:12px;font-size:12px;font-weight:800;box-shadow:var(--shadow)}
+.search-area{margin-top:26px;display:flex;gap:10px;max-width:660px}.search-box{flex:1;display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:0 15px;box-shadow:0 5px 20px rgba(30,20,10,.04)}.search-box input{width:100%;border:0;outline:0;padding:16px 0;background:transparent;font-size:15px}.search-box:focus-within{border-color:var(--orange);box-shadow:0 0 0 3px #f45b3520}.search-icon{font-size:19px;color:var(--muted)}.clear-search{border:0;background:none;color:var(--muted);font-size:20px;display:none}.section{padding:34px 0}.section-head{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-bottom:20px}.section h2{font-size:25px;letter-spacing:-.8px;margin:0}.sub{color:var(--muted);font-size:13px;margin-top:6px}.filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 22px}.chip{border:1px solid var(--line);background:#fff;color:#555;padding:9px 14px;border-radius:999px;font-size:13px;font-weight:700}.chip.active{background:var(--ink);border-color:var(--ink);color:#fff}.restaurants{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.restaurant{border:1px solid var(--line);border-radius:19px;overflow:hidden;background:#fff;transition:.2s;cursor:pointer}.restaurant:hover{transform:translateY(-3px);box-shadow:var(--shadow)}.restaurant img{width:100%;height:155px;object-fit:cover;background:#f4eee8;display:block}.r-body{padding:14px}.r-top{display:flex;justify-content:space-between;gap:10px;align-items:start}.r-name{font-size:17px;font-weight:850;letter-spacing:-.3px}.rating{font-size:12px;background:#eaf7ef;color:#167743;padding:5px 8px;border-radius:8px;white-space:nowrap;font-weight:800}.r-meta{font-size:12px;color:var(--muted);margin-top:6px}.r-foot{display:flex;justify-content:space-between;align-items:center;margin-top:13px;padding-top:12px;border-top:1px solid #f1ece7;font-size:12px;color:var(--muted)}.view-menu{color:var(--orange);font-weight:850}
+.menu-section{background:#fffaf6;border-top:1px solid #f6eee7;border-bottom:1px solid #f6eee7}.menu-head{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:18px}.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.food{display:flex;gap:13px;background:white;border:1px solid var(--line);border-radius:16px;padding:12px;min-width:0}.food-emoji{width:78px;height:78px;flex:0 0 78px;border-radius:12px;background:#fff0e7;display:grid;place-items:center;font-size:38px}.food-info{min-width:0;flex:1}.food-name{font-size:14px;font-weight:850}.food-hotel{font-size:11px;color:var(--muted);margin-top:4px}.food-price{font-size:14px;font-weight:850;margin-top:8px}.add{border:1px solid #ffd1c3;color:var(--orange);background:#fff8f5;border-radius:9px;padding:6px 10px;font-size:12px;font-weight:850;float:right}.tag{font-size:10px;color:#9a6b38;background:#fff4df;padding:4px 6px;border-radius:5px;margin-top:5px;display:inline-block}.notice{padding:13px 15px;border-radius:12px;background:#fff4df;color:#77531d;font-size:12px;line-height:1.6;margin:18px 0}.empty{grid-column:1/-1;text-align:center;padding:35px 15px;color:var(--muted);background:#fff;border:1px dashed #e8ddd3;border-radius:16px}
+footer{padding:30px 0 42px;color:var(--muted);font-size:12px;line-height:1.7}.footer-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:22px}
+.overlay{position:fixed;inset:0;background:#17131080;z-index:40;display:none;justify-content:flex-end}.overlay.show{display:flex}.drawer{width:min(440px,100%);height:100%;background:white;padding:22px;overflow:auto;box-shadow:-15px 0 45px #0002}.drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.drawer-head h2{margin:0}.x{border:0;background:#f5f1ed;border-radius:10px;width:36px;height:36px;font-size:20px}.cart-line{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}.line-title{font-weight:800;font-size:14px}.line-hotel{font-size:11px;color:var(--muted);margin-top:4px}.qty{display:flex;align-items:center;gap:9px;margin-top:8px}.qty button{width:25px;height:25px;border:1px solid var(--line);border-radius:7px;background:white}.total{display:flex;justify-content:space-between;font-weight:900;font-size:18px;padding:18px 0}.checkout{border-top:1px solid var(--line);margin-top:12px;padding-top:18px}.field{margin:12px 0}.field label{display:block;font-size:12px;font-weight:800;margin-bottom:6px}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:10px;padding:12px;outline:0;background:#fff}.field input:focus,.field textarea:focus{border-color:var(--orange)}.primary{width:100%;border:0;border-radius:12px;background:var(--orange);color:white;padding:14px;font-weight:900;margin-top:8px}.secondary{width:100%;border:1px solid var(--line);border-radius:12px;background:white;padding:12px;font-weight:800;margin-top:8px}.smallprint{font-size:11px;color:var(--muted);line-height:1.6;margin-top:10px}.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);background:#222;color:white;padding:12px 17px;border-radius:12px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:60}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:850px){.hero-grid{grid-template-columns:1fr .7fr}.restaurants{grid-template-columns:repeat(2,1fr)}.menu-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.nav{height:65px}.location{display:none}.brand{font-size:18px}.hero{padding:38px 0 25px}.hero-grid{grid-template-columns:1fr}.hero-art{min-height:160px}.hero-food{font-size:115px}.hero h1{letter-spacing:-1.8px}.search-area{margin-top:20px}.restaurants{grid-template-columns:1fr 1fr;gap:10px}.restaurant img{height:115px}.r-body{padding:10px}.r-name{font-size:14px}.rating{font-size:10px}.r-meta{font-size:10px}.menu-grid{grid-template-columns:1fr}.section{padding:26px 0}.section h2{font-size:22px}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <div class="brand"><span class="brand-mark">🍴</span><span>MUDHOL <span>EATS</span></span></div>
+  <div class="nav-right"><div class="location">📍 Delivering around <b>Mudhol</b></div><button class="cart-btn" id="openCart">🛒 Cart <span class="cart-count" id="cartCount">0</span></button></div>
+</div></header>
+<main>
+<section class="hero"><div class="wrap hero-grid">
+ <div><div class="eyebrow">GOOD FOOD. CLOSE TO HOME.</div><h1>Your town.<br>Your food.<br><em>Your choice.</em></h1><p>Discover local restaurants in Mudhol, explore their food and find out exactly which kitchen your meal comes from.</p>
+ <div class="search-area"><div class="search-box"><span class="search-icon">⌕</span><input id="searchInput" type="search" placeholder="Search dishes or restaurants..." autocomplete="off"><button class="clear-search" id="clearSearch" aria-label="Clear search">×</button></div></div>
+ </div>
+ <div class="hero-art"><div class="hero-food">🍛</div><div class="hero-tag">Made around Mudhol ❤️</div></div>
+</div></section>
+<section class="section"><div class="wrap">
+ <div class="section-head"><div><h2>Explore local restaurants</h2><div class="sub">Choose a restaurant to see its dishes</div></div></div>
+ <div class="filters" id="filters"><button class="chip active" data-filter="All">All</button><button class="chip" data-filter="Veg">Pure veg</button><button class="chip" data-filter="Non-veg">Non-veg</button><button class="chip" data-filter="Cafe">Cafes</button></div>
+ <div class="restaurants" id="restaurantGrid"></div>
+</div></section>
+<section class="section menu-section" id="menu"><div class="wrap">
+ <div class="menu-head"><div><h2 id="menuTitle">Popular near you</h2><div class="sub" id="menuSub">Food listings show the restaurant they come from</div></div><button class="chip" id="showAll">Show all</button></div>
+ <div class="menu-grid" id="foodGrid"></div>
+ <div class="notice">Menu accuracy note: Only the A1 Family Restaurant dishes below are based on its publicly published menu. Other restaurants' dishes and prices are illustrative sample listings, not confirmed current menus or prices. Please verify directly with each restaurant before ordering.</div>
+</div></section>
+</main>
+<footer><div class="wrap footer-row"><div><b style="color:#202124">MUDHOL EATS</b><br>Local flavours, one place.</div><div>Independent demo website · Not affiliated with the restaurants shown.<br>Restaurant participation, menus, delivery and prices must be confirmed.</div></div></footer>
+
+<div class="overlay" id="cartOverlay" role="dialog" aria-modal="true" aria-label="Shopping cart"><aside class="drawer">
+ <div class="drawer-head"><h2>Your cart 🛒</h2><button class="x" id="closeCart" aria-label="Close cart">×</button></div>
+ <div id="cartItems"></div><div id="cartBottom"></div>
+</aside></div>
+<div class="toast" id="toast"></div>
+<script>
+const restaurants = [
+ {id:'a1',name:'A1 Family Restaurant',kind:'Non-veg',type:'Family restaurant',area:'Near Busstand, Mantur Road',rating:'4.4',time:'Menu published online',image:'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80'},
+ {id:'cafetree',name:'CafeTree Mudhol',kind:'Cafe',type:'Cafe · fast food',area:'Suryavanshi Multiplex, Mantur Road',rating:'4.1',time:'Cafe-style food',image:'https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=900&q=80'},
+ {id:'shabari',name:'Shri Shabari Restaurant',kind:'Veg',type:'Vegetarian restaurant',area:'Lokapur Road, Mudhol',rating:'4.1',time:'Vegetarian',image:'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=900&q=80'},
+ {id:'aradhana',name:'Aradhana Restaurant',kind:'Non-veg',type:'Indian restaurant',area:'SH 55, Mudhol',rating:'3.9',time:'Indian meals & thalis',image:'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=900&q=80'},
+ {id:'namma',name:'Cafe Namma Adda',kind:'Cafe',type:'Pizza · coffee shop',area:'Udapudi Arcade, College Road',rating:'3.8',time:'Cafe-style food',image:'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=900&q=80'},
+ {id:'mandavakar',name:"Mandavakar Kitchen's",kind:'Non-veg',type:'Food court',area:'Jamakhandi Road, near Surabi Hotel',rating:'4.8',time:'Local kitchen',image:'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=900&q=80'}
+];
+const foods = [
+ {id:'a1-1',hotel:'a1',name:'Chicken Biryani',price:200,emoji:'🍗',desc:'Aromatic biryani rice with chicken',verified:true,category:'Biryani'},
+ {id:'a1-2',hotel:'a1',name:'Egg Biryani',price:150,emoji:'🍛',desc:'Biryani rice with boiled egg',verified:true,category:'Biryani'},
+ {id:'a1-3',hotel:'a1',name:'Chicken Tandoori',price:140,emoji:'🍗',desc:'Tandoori-style chicken',verified:true,category:'Starter'},
+ {id:'a1-4',hotel:'a1',name:'Butter Chicken',price:220,emoji:'🥘',desc:'Creamy tomato chicken curry',verified:true,category:'Curry'},
+ {id:'a1-5',hotel:'a1',name:'Jeera Rice',price:120,emoji:'🍚',desc:'Rice flavoured with cumin',verified:true,category:'Rice'},
+ {id:'a1-6',hotel:'a1',name:'Butter Naan',price:45,emoji:'🫓',desc:'Soft naan with butter',verified:true,category:'Bread'},
+ {id:'ct-1',hotel:'cafetree',name:'Classic Veg Burger',price:99,emoji:'🍔',desc:'Sample listing · confirm menu',category:'Cafe'},
+ {id:'ct-2',hotel:'cafetree',name:'French Fries',price:79,emoji:'🍟',desc:'Sample listing · confirm menu',category:'Cafe'},
+ {id:'ct-3',hotel:'cafetree',name:'Cold Coffee',price:89,emoji:'🥤',desc:'Sample listing · confirm menu',category:'Cafe'},
+ {id:'sh-1',hotel:'shabari',name:'Idli Sambar',price:50,emoji:'🥣',desc:'Sample listing · confirm menu',category:'Breakfast'},
+ {id:'sh-2',hotel:'shabari',name:'Masala Dosa',price:70,emoji:'🥞',desc:'Sample listing · confirm menu',category:'Breakfast'},
+ {id:'sh-3',hotel:'shabari',name:'Veg Fried Rice',price:100,emoji:'🍚',desc:'Sample listing · confirm menu',category:'Rice'},
+ {id:'ar-1',hotel:'aradhana',name:'Veg Thali',price:100,emoji:'🍱',desc:'Sample listing · confirm menu',category:'Meals'},
+ {id:'ar-2',hotel:'aradhana',name:'Chicken Thali',price:180,emoji:'🍛',desc:'Sample listing · confirm menu',category:'Meals'},
+ {id:'ar-3',hotel:'aradhana',name:'Fish Thali',price:200,emoji:'🐟',desc:'Sample listing · confirm menu',category:'Meals'},
+ {id:'na-1',hotel:'namma',name:'Margherita Pizza',price:149,emoji:'🍕',desc:'Sample listing · confirm menu',category:'Cafe'},
+ {id:'na-2',hotel:'namma',name:'Cheese Sandwich',price:89,emoji:'🥪',desc:'Sample listing · confirm menu',category:'Cafe'},
+ {id:'na-3',hotel:'namma',name:'Chocolate Shake',price:99,emoji:'🥤',desc:'Sample listing · confirm menu',category:'Cafe'},
+ {id:'mk-1',hotel:'mandavakar',name:'Chicken Dum Biryani',price:180,emoji:'🍗',desc:'Sample listing · confirm menu',category:'Biryani'},
+ {id:'mk-2',hotel:'mandavakar',name:'Chicken Curry',price:160,emoji:'🥘',desc:'Sample listing · confirm menu',category:'Curry'}
+];
+let cart = JSON.parse(localStorage.getItem('mudholEatsCart')||'[]');
+let activeFilter='All', selectedRestaurant='All', searchTerm='';
+const $=id=>document.getElementById(id);
+const hotel=id=>restaurants.find(r=>r.id===id);
+const money=n=>'₹'+n.toFixed(0);
+function saveCart(){localStorage.setItem('mudholEatsCart',JSON.stringify(cart));renderCartCount()}
+function renderRestaurants(){
+ const list=restaurants.filter(r=>(activeFilter==='All'||r.kind===activeFilter)&&(!searchTerm||(r.name+' '+r.area+' '+r.type).toLowerCase().includes(searchTerm)));
+ $('restaurantGrid').innerHTML=list.length?list.map(r=>`<article class="restaurant" data-id="${r.id}" tabindex="0" role="button" aria-label="View ${r.name} menu"><img src="${r.image}" alt="${r.name}" loading="lazy"><div class="r-body"><div class="r-top"><div class="r-name">${r.name}</div><span class="rating">★ ${r.rating}</span></div><div class="r-meta">${r.type} · ${r.area}</div><div class="r-foot"><span>${r.time}</span><span class="view-menu">View menu →</span></div></div></article>`).join(''):'<div class="empty">No restaurants match that search. Try another name.</div>';
+ document.querySelectorAll('.restaurant').forEach(el=>{const go=()=>{selectedRestaurant=el.dataset.id;renderFoods();$('menu').scrollIntoView({behavior:'smooth'})};el.addEventListener('click',go);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}})});
+}
+function renderFoods(){
+ let list=foods.filter(f=>(selectedRestaurant==='All'||f.hotel===selectedRestaurant)&&(!searchTerm||(f.name+' '+hotel(f.hotel).name+' '+f.category).toLowerCase().includes(searchTerm)));
+ $('menuTitle').textContent=selectedRestaurant==='All'?'Popular near you':hotel(selectedRestaurant).name+' menu';
+ $('menuSub').textContent=selectedRestaurant==='All'?'Every dish shows the restaurant it comes from':'Food listed by '+hotel(selectedRestaurant).name;
+ $('foodGrid').innerHTML=list.length?list.map(f=>`<article class="food"><div class="food-emoji">${f.emoji}</div><div class="food-info"><div class="food-name">${f.name}</div><div class="food-hotel">From: <b>${hotel(f.hotel).name}</b></div><div class="food-price">${money(f.price)}</div>${f.verified?'<span class="tag">Published menu</span>':'<span class="tag">Sample · verify price</span>'}<button class="add" data-add="${f.id}">+ Add</button></div></article>`).join(''):'<div class="empty">No dishes found. Try a different search.</div>';
+ document.querySelectorAll('[data-add]').forEach(b=>b.addEventListener('click',()=>addToCart(b.dataset.add)));
+}
+function renderCartCount(){$('cartCount').textContent=cart.reduce((n,x)=>n+x.qty,0)}
+function addToCart(id){let f=foods.find(x=>x.id===id);let existing=cart.find(x=>x.id===id);if(existing)existing.qty++;else cart.push({id,qty:1});saveCart();toast(f.name+' added to cart');}
+function changeQty(id,d){let item=cart.find(x=>x.id===id);if(!item)return;item.qty+=d;if(item.qty<=0)cart=cart.filter(x=>x.id!==id);saveCart();renderCart()}
+function renderCart(){
+ const box=$('cartItems'),bottom=$('cartBottom');
+ if(!cart.length){box.innerHTML='<div class="empty">Your cart is empty.<br><br>Find something delicious in Mudhol!</div>';bottom.innerHTML='';return}
+ box.innerHTML=cart.map(x=>{let f=foods.find(y=>y.id===x.id);return `<div class="cart-line"><div><div class="line-title">${f.name}</div><div class="line-hotel">From: ${hotel(f.hotel).name}</div><div class="qty"><button data-q="${f.id}" data-d="-1">−</button><b>${x.qty}</b><button data-q="${f.id}" data-d="1">+</button></div></div><b>${money(f.price*x.qty)}</b></div>`}).join('');
+ let total=cart.reduce((s,x)=>s+foods.find(f=>f.id===x.id).price*x.qty,0);
+ let same=cart.every(x=>foods.find(f=>f.id===x.id).hotel===foods.find(f=>f.id===cart[0].id).hotel);
+ bottom.innerHTML=`<div class="total"><span>Subtotal</span><span>${money(total)}</span></div><div class="smallprint">${same?'Your cart is from one restaurant.':'Your cart contains items from multiple restaurants. Separate orders may be needed.'} Delivery charges, availability and final prices must be confirmed by the restaurant.</div>
+ <div class="checkout"><h3>Order details</h3><div class="field"><label for="customerName">Your name</label><input id="customerName" placeholder="Enter your name" maxlength="60"></div><div class="field"><label for="customerPhone">Phone number</label><input id="customerPhone" inputmode="tel" placeholder="10-digit mobile number" maxlength="10"></div><div class="field"><label for="customerAddress">Delivery address</label><textarea id="customerAddress" rows="2" placeholder="House / street / area in Mudhol"></textarea></div><div class="field"><label for="paymentMethod">Payment preference</label><select id="paymentMethod"><option>Pay directly to restaurant on delivery (confirm first)</option><option>Cash on delivery (if restaurant agrees)</option></select></div><button class="primary" id="placeOrder">Review order</button><div class="smallprint">Demo checkout only: this page does not send orders, collect payments or confirm delivery. Contact the restaurant and get its agreement before accepting real orders.</div></div>`;
+ document.querySelectorAll('[data-q]').forEach(b=>b.addEventListener('click',()=>changeQty(b.dataset.q,Number(b.dataset.d))));
+ $('placeOrder').addEventListener('click',reviewOrder);
+}
+function reviewOrder(){
+ let name=$('customerName').value.trim(),phone=$('customerPhone').value.trim(),address=$('customerAddress').value.trim();
+ if(!name||!address||!/^[6-9]\d{9}$/.test(phone)){toast('Enter your name, valid 10-digit phone and address');return}
+ let lines=cart.map(x=>{let f=foods.find(y=>y.id===x.id);return `${x.qty} x ${f.name} — ${hotel(f.hotel).name} — ${money(f.price*x.qty)}`}).join('\n');
+ let total=cart.reduce((s,x)=>s+foods.find(f=>f.id===x.id).price*x.qty,0);
+ let summary=`ORDER REVIEW\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nPayment preference: ${$('paymentMethod').value}\n\n${lines}\n\nSubtotal: ${money(total)}\n\nThis is a demo order. Contact each restaurant directly to confirm menu, price, delivery and availability.`;
+ alert(summary);
+}
+function toast(msg){$('toast').textContent=msg;$('toast').classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>$('toast').classList.remove('show'),2100)}
+$('openCart').addEventListener('click',()=>{$('cartOverlay').classList.add('show');renderCart()});
+$('closeCart').addEventListener('click',()=>$('cartOverlay').classList.remove('show'));
+$('cartOverlay').addEventListener('click',e=>{if(e.target===$('cartOverlay'))$('cartOverlay').classList.remove('show')});
+$('searchInput').addEventListener('input',e=>{searchTerm=e.target.value.trim().toLowerCase();$('clearSearch').style.display=searchTerm?'block':'none';renderRestaurants();renderFoods()});
+$('clearSearch').addEventListener('click',()=>{$('searchInput').value='';searchTerm='';$('clearSearch').style.display='none';renderRestaurants();renderFoods();$('searchInput').focus()});
+$('filters').addEventListener('click',e=>{let b=e.target.closest('[data-filter]');if(!b)return;activeFilter=b.dataset.filter;document.querySelectorAll('.chip[data-filter]').forEach(x=>x.classList.toggle('active',x===b));renderRestaurants()});
+$('showAll').addEventListener('click',()=>{selectedRestaurant='All';renderFoods();$('menu').scrollIntoView({behavior:'smooth'})});
+renderRestaurants();renderFoods();renderCartCount();
+</script>
+</body>
+</html>
